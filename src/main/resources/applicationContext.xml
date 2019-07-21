@@ -3,6 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
        default-init-method="init"
+       default-lazy-init="true"
        default-destroy-method="destroy">
 
 
@@ -12,7 +13,7 @@
     </bean>
 
     <bean id="zadOne" class="com.seba.ZadOne" scope="prototype">
-         <property name="numerOne" value="3"/>
+        <property name="numerOne" value="3"/>
         <property name="numberTwo" value="2"/>
     </bean>
 
@@ -21,9 +22,36 @@
     </bean>
 
     <bean id="zadThree" class="com.seba.ZadThree" scope="singleton" init-method="initZad" destroy-method="destroyZad">
-        <property name="text" value="AAA"/>
+    <property name="text" value="AAA"/>
+    </bean>
+
+    <bean id = "zadFour" class="com.seba.ZadFour" scope="prototype">
+        <property name = "text1" value = "Hello World template!"/>
+        <property name = "text2" value = "Hello World template 2!"/>
+        <property name = "text3" value = "Hello World template 3!"/>
+    </bean>
+
+    <bean id = "beanTemplate"  abstract="true">
+        <property name = "text1" value = "Hello  template!"/>
+        <property name = "text2" value = "Hello  template 2!"/>
+        <property name = "text3" value = "Hello  template 3!"/>
+    </bean>
+
+    <bean id = "beanForTemplate" class="com.seba.ZadFour" parent="beanTemplate">
+    </bean>
+
+
+    <bean id="computer" class="com.seba.Computer" scope="prototype">
+        <property name="name" value="KOMP"/>
+        <property name="ram">
+            <bean id="ram" class="com.seba.Ram">
+                <property name = "value" value = "8"/>
+            </bean>
+        </property>
+
 
     </bean>
+
 
 
 </beans>
